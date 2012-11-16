@@ -26,3 +26,4 @@ Pré-requisitos
 Saiba mais
 -------
 Visite a página do projeto:
+http://www.yaw.com.br/open/projetos/swing-jpa-crud/
