@@ -40,7 +40,7 @@ public class BuscarMercadoriaController extends PersistenceController {
 			
 			public void posAction() {
 				cleanUp();
-				if (list != null && !list.isEmpty()) {
+				if (list != null) {
 					fireEvent(new BuscarMercadoriaEvent(list));
 				}
 			}
