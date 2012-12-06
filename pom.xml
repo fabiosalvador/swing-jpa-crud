@@ -12,6 +12,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.title>Demo Swing c/ JPA</project.title>
+		<user.name>YaW Tecnologia</user.name>
+		<site>http://www.yaw.com.br</site>
 	</properties>
 
 	<dependencies>
@@ -53,6 +56,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>${artifactId}</finalName>
+		<finalName>${project.artifactId}</finalName>
 	</build>
 </project>
