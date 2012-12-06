@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -26,6 +29,8 @@ public class ListaMercadoriasFrame extends JFrame {
 	private JButton bRemoveMercadoria;
 	private JButton bFindMercadoria;
 	private JButton bRefreshLista;
+	private JMenuBar menubar;
+	private JMenuItem menuSobre;
 	
 	public ListaMercadoriasFrame() {
 		setTitle("Lista de Mercadoria");
@@ -58,6 +63,15 @@ public class ListaMercadoriasFrame extends JFrame {
 		bRefreshLista = new JButton("Atualizar");
 		bRefreshLista.setActionCommand("atualizarMercadoriasAction");
 		bRefreshLista.setMnemonic(KeyEvent.VK_A);
+		
+		menubar = new JMenuBar();
+		JMenu menuAjuda = new JMenu("Ajuda");
+		menuAjuda.setMnemonic(KeyEvent.VK_J);
+        menuSobre = new JMenuItem("Sobre");
+        
+        menuAjuda.add(menuSobre);
+        menubar.add(menuAjuda);
+        setJMenuBar(menubar);
 	}
 	
 	private void adicionaComponentes(){
@@ -96,5 +110,9 @@ public class ListaMercadoriasFrame extends JFrame {
 	
 	public MercadoriaTable getTable() {
 		return tabela;
+	}
+	
+	public JMenuItem getMenuSobre() {
+		return menuSobre;
 	}
 }

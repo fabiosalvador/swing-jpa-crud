@@ -16,6 +16,7 @@ import br.com.yaw.sjpac.event.DeletarMercadoriaEvent;
 import br.com.yaw.sjpac.event.IncluirMercadoriaEvent;
 import br.com.yaw.sjpac.model.Mercadoria;
 import br.com.yaw.sjpac.ui.ListaMercadoriasFrame;
+import br.com.yaw.sjpac.ui.SobreFrame;
 import br.com.yaw.sjpac.util.JPAUtil;
 
 /**
@@ -28,6 +29,8 @@ import br.com.yaw.sjpac.util.JPAUtil;
 public class ListaMercadoriaController extends PersistenceController {
 
 	private ListaMercadoriasFrame frame;
+	private SobreFrame sobreFrame;
+	
 	private IncluirMercadoriaController incluirController;
 	private BuscarMercadoriaController buscarController;
 	
@@ -37,6 +40,7 @@ public class ListaMercadoriaController extends PersistenceController {
 		frame.addWindowListener(this);
 		incluirController = new IncluirMercadoriaController(this);
 		buscarController = new BuscarMercadoriaController(this);
+		this.sobreFrame = new SobreFrame();
 		
 		registerAction(frame.getNewButton(), new AbstractAction() {
 			public void action() {
@@ -53,6 +57,13 @@ public class ListaMercadoriaController extends PersistenceController {
 		registerAction(frame.getFindButton(), new AbstractAction() {
 			public void action() {
 				buscarController.show();
+			}
+		});
+		
+		registerAction(frame.getMenuSobre(), new AbstractAction() {
+			@Override
+			protected void action() {
+				sobreFrame.setVisible(true);
 			}
 		});
 		
