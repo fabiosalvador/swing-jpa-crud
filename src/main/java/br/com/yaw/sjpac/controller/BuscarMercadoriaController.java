@@ -2,8 +2,6 @@ package br.com.yaw.sjpac.controller;
 
 import java.util.List;
 
-import javax.swing.JFrame;
-
 import br.com.yaw.sjpac.action.AbstractAction;
 import br.com.yaw.sjpac.dao.MercadoriaDAO;
 import br.com.yaw.sjpac.dao.MercadoriaDAOJPA;
@@ -47,11 +45,6 @@ public class BuscarMercadoriaController extends PersistenceController {
 		});
 	}
 	
-	@Override
-	protected JFrame getFrame() {
-		return frame;
-	}
-
 	public void show() {
 		loadPersistenceContext();
 		frame.setVisible(true);

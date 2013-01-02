@@ -1,7 +1,5 @@
 package br.com.yaw.sjpac.controller;
 
-import javax.swing.JFrame;
-
 import br.com.yaw.sjpac.action.AbstractAction;
 import br.com.yaw.sjpac.dao.MercadoriaDAO;
 import br.com.yaw.sjpac.dao.MercadoriaDAOJPA;
@@ -55,20 +53,15 @@ public class IncluirMercadoriaController extends PersistenceController {
 		});
 	}
 	
-	@Override
-	protected JFrame getFrame() {
-		return frame;
-	}
-	
 	public void show() {
 		loadPersistenceContext(((PersistenceController)getParentController()).getPersistenceContext());
 		frame.setVisible(true);
 	}
 	
 	public void show(Mercadoria m) {
-		((IncluirMercadoriaFrame) getFrame()).setMercadoria(m);
-		show();
+		frame.setMercadoria(m);
 		frame.setTitle("Editar");
+		show();
 	}
 	
 	@Override

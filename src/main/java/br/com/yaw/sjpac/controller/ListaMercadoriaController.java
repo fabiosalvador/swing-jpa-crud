@@ -3,7 +3,6 @@ package br.com.yaw.sjpac.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import br.com.yaw.sjpac.action.AbstractAction;
@@ -143,11 +142,6 @@ public class ListaMercadoriaController extends PersistenceController {
 		
 		frame.setVisible(true);
 		refreshTable();
-	}
-	
-	@Override
-	protected JFrame getFrame() {
-		return frame;
 	}
 	
 	private void refreshTable() {
