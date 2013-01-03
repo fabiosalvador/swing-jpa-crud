@@ -1,6 +1,8 @@
 package br.com.yaw.sjpac.app;
 
 
+import java.util.Locale;
+
 import br.com.yaw.sjpac.controller.ListaMercadoriaController;
 
 /**
@@ -11,6 +13,7 @@ import br.com.yaw.sjpac.controller.ListaMercadoriaController;
 public class Main {
 
 	public static void main(String[] args) {
+		Locale.setDefault(new Locale("pt","BR"));
 		new ListaMercadoriaController();
 	}
 

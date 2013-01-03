@@ -106,15 +106,19 @@ public abstract class AbstractController implements ActionListener, WindowListen
         eventListeners.put(eventClass, listenersForEvent);
     }
 	
+	protected AbstractAction getAction(ActionEvent actionEvent) {
+		AbstractButton button = (AbstractButton) actionEvent.getSource();
+		String actionCommand = button.getActionCommand();
+		return actions.get(actionCommand);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		try {
-			AbstractButton button = (AbstractButton) actionEvent.getSource();
-			String actionCommand = button.getActionCommand();
-			AbstractAction action = actions.get(actionCommand);
+			AbstractAction action = getAction(actionEvent);
 
 			if (action != null) {
-				log.debug("Executando commando: " + actionCommand + " com action: " + action.getClass());
+				log.debug("Executando action: " + action.getClass());
 				try {
 					action.actionPerformed();
 				} catch (Exception ex) {

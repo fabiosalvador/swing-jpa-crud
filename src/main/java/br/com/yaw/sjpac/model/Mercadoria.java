@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Classe de modelo que representa uma mercadoria. A mercadoria é um objeto persistido no banco de dados, por isso utilizamos a classificamos como <strong>Entidade</strong>.
@@ -26,9 +29,15 @@ public class Mercadoria implements AbstractEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
+	@NotNull @Size(min=5, max=200)
 	private String nome;
+	
 	private String descricao;
+	
+	@NotNull @Min(value=1)
 	private Integer quantidade;
+	
+	@NotNull @Min(value=1)
 	private Double preco;
 	
 	/** Atributo utilizado para controle <code>lock</code> (otimista) da <code>JPA</code> para cada registro (objeto) Mercadoria. */

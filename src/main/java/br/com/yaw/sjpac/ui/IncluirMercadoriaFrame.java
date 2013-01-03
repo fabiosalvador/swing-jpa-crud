@@ -31,6 +31,7 @@ public class IncluirMercadoriaFrame extends JFrame {
 	
 	private JButton bSalvar;
 	private JButton bCancelar;
+	private JButton bExcluir;
 	
 	public IncluirMercadoriaFrame() {
 		setTitle("Incluir");
@@ -61,6 +62,11 @@ public class IncluirMercadoriaFrame extends JFrame {
 		bCancelar.setActionCommand("cancelarIncluirMercadoriaAction");
 		bCancelar.setMnemonic(KeyEvent.VK_C);
 		panel.add(bCancelar);
+		
+		bExcluir = new JButton("Excluir");
+		bExcluir.setActionCommand("excluirMercadoriaAction");
+		bExcluir.setMnemonic(KeyEvent.VK_E);
+		panel.add(bExcluir);
 
 		return panel;
 	}
@@ -95,25 +101,7 @@ public class IncluirMercadoriaFrame extends JFrame {
 		return painel;
 	}
 	
-	
-	private String validador() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(tfNome.getText() == null || "".equals(tfNome.getText().trim()) ? "Nome, " : "");
-		sb.append(tfPreco.getText() == null || "".equals(tfPreco.getText().trim()) ? "Preco, " : "");
-		sb.append(tfQuantidade.getText() == null || "".equals(tfQuantidade.getText().trim()) ? "Quantidade, " : "");
-		
-		if (!sb.toString().isEmpty()) {
-			sb.delete(sb.toString().length()-2, sb.toString().length());
-		}
-		return sb.toString();
-	}
-	
 	private Mercadoria loadMercadoriaFromPanel() {
-		String msg = validador();
-		if (!msg.isEmpty()) {
-			throw new RuntimeException("Informe o(s) campo(s): "+msg);
-		}
-		
 		String nome = tfNome.getText();
 		String descricao = tfDescricao.getText();
 		
@@ -151,6 +139,7 @@ public class IncluirMercadoriaFrame extends JFrame {
 		tfPreco.setText("");
 		tfQuantidade.setValue(new Integer(1));
 		tfVersion.setValue(null);
+		bExcluir.setVisible(false);
 	}
 	
 	private void populaTextFields(Mercadoria m){
@@ -166,11 +155,20 @@ public class IncluirMercadoriaFrame extends JFrame {
 		resetForm();
 		if (m != null) {
 			populaTextFields(m);
+			bExcluir.setVisible(true);
 		}
 	}
 	
 	public Mercadoria getMercadoria() {
 		return loadMercadoriaFromPanel();
+	}
+	
+	public Integer getMercadoriaId() {
+		try {
+			return Integer.parseInt(tfId.getText());
+		} catch (Exception nex) {
+			return null;
+		}
 	}
 	
 	public JButton getSalvarButton() {
@@ -180,4 +178,9 @@ public class IncluirMercadoriaFrame extends JFrame {
 	public JButton getCancelarButton() {
 		return bCancelar;
 	}
+	
+	public JButton getExcluirButton() {
+		return bExcluir;
+	}
+
 }

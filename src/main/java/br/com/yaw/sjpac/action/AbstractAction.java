@@ -3,19 +3,28 @@ package br.com.yaw.sjpac.action;
 /**
  * Componente representa uma ação, normalmente vinculada a intervenção do usuário nos componentes de interface gráfica para solicitar uma operação no sistema.
  * 
- * <p>Nessa aplicação a <code>AbstractAction</code> define um tipo de componente complementar ao <code>MVC</code> (<strong>M</strong>odel <strong>V</strong>iew <strong>C</strong>ontroller), um modelo arquitetural utilizado para organizar os componentes do sistema.</p>
- * <p>Utiliza o design pattern <code>Template Method</code> para definir um estrutura/template com pré e pós processamento vinculados a ação:
+ * <p>Nessa aplicação a <code>AbstractAction</code> define um tipo de componente complementar 
+ * ao <code>MVC</code> (<strong>M</strong>odel <strong>V</strong>iew <strong>C</strong>ontroller), um modelo arquitetural utilizado para organizar os componentes do sistema.</p>
+ * 
+ * <p>
+ *  Utiliza o design pattern <code>Template Method</code> para definir um estrutura/template 
+ *  com pré e pós processamento vinculados a ação:
+ * </p>
  * 
  * <ul>
  *   <li><code>preAction()</code>: Acionando antes da execução de <code>action()</code>.</li>
- *   <li><code>posAction()</code>: Acionando depois da execução (com sucesso) de <code>action()</code>.</li>
+ *   <li><code>posAction()</code>: Acionando após a execução (com sucesso) de <code>action()</code>.</li>
  *   <li><code>actionFailure()</code>: Acionando caso a execução de <code>action()</code> falhe.</li>
  * </ul>
- * 
+ *  
  * @author YaW Tecnologia
  */
 public abstract class AbstractAction {
-
+	
+	//TODO repensar essa estrutura...
+	
+	protected boolean skip;
+	
 	/**
 	 * Método principal, que define o processamento da <code>Action</code>.
 	 */
@@ -43,13 +52,22 @@ public abstract class AbstractAction {
 	 */
 	public void actionPerformed() {
     	try {
+    		skip = false;
     		preAction();
-    		action();
-    		posAction();
+    		if (!skip) {
+    			action();
+    		}
+    		if (!skip) {
+    			posAction();
+    		}
     	} catch (Exception ex) {
     		actionFailure();
     		throw new RuntimeException(ex);
     	}
+	}
+	
+	public void interrupt(){
+		skip = true;
 	}
 	
 }

@@ -26,7 +26,6 @@ public class ListaMercadoriasFrame extends JFrame {
 	private MercadoriaTable tabela;
 	private JScrollPane scrollPane;
 	private JButton bNewMercadoria;
-	private JButton bRemoveMercadoria;
 	private JButton bFindMercadoria;
 	private JButton bRefreshLista;
 	private JMenuBar menubar;
@@ -52,10 +51,6 @@ public class ListaMercadoriasFrame extends JFrame {
 		bNewMercadoria.setActionCommand("novaMercadoriaAction");
 		bNewMercadoria.setMnemonic(KeyEvent.VK_N);
 		
-		bRemoveMercadoria = new JButton("Excluir");
-		bRemoveMercadoria.setActionCommand("excluirMercadoriaAction");
-		bRemoveMercadoria.setMnemonic(KeyEvent.VK_E);
-		
 		bFindMercadoria = new JButton("Buscar");
 		bFindMercadoria.setActionCommand("buscarMercadoriasAction");
 		bFindMercadoria.setMnemonic(KeyEvent.VK_B);
@@ -78,7 +73,6 @@ public class ListaMercadoriasFrame extends JFrame {
 		add(scrollPane);
 		JPanel panel = new JPanel();
 		panel.add(bNewMercadoria);
-		panel.add(bRemoveMercadoria);
 		panel.add(bFindMercadoria);
 		panel.add(bRefreshLista);
 		add(panel, BorderLayout.SOUTH);
@@ -86,10 +80,6 @@ public class ListaMercadoriasFrame extends JFrame {
 	
 	public JButton getNewButton() {
 		return bNewMercadoria;
-	}
-	
-	public JButton getRemoveButton() {
-		return bRemoveMercadoria;
 	}
 
 	public JButton getRefreshButton() {

@@ -1,9 +1,13 @@
 package br.com.yaw.sjpac.controller;
 
+import java.awt.event.ActionEvent;
+
 import javax.persistence.EntityManager;
 
 import org.apache.log4j.Logger;
 
+import br.com.yaw.sjpac.action.AbstractAction;
+import br.com.yaw.sjpac.action.TransactionAction;
 import br.com.yaw.sjpac.util.JPAUtil;
 
 /**
@@ -40,6 +44,16 @@ public abstract class PersistenceController extends AbstractController {
             this.persistenceContext = persistenceContext;
             this.ownsPersistenceContext = false;
         }
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        AbstractAction action = getAction(actionEvent);
+        if (action instanceof TransactionAction) {
+            TransactionAction tAction = (TransactionAction) action;
+            tAction.setPersistenceContext(persistenceContext);
+        }
+        super.actionPerformed(actionEvent);
     }
     
     public EntityManager getPersistenceContext() {

@@ -66,29 +66,6 @@ public class ListaMercadoriaController extends PersistenceController {
 			}
 		});
 		
-		registerAction(frame.getRemoveButton(), new AbstractAction() {
-			Mercadoria m;
-			
-			public void action() {
-				m = frame.getSelectedMercadoria();
-				if (m != null) {
-					try {
-						getPersistenceContext().getTransaction().begin();
-						MercadoriaDAO dao = new MercadoriaDAOJPA(getPersistenceContext());
-						dao.remove(m);
-						getPersistenceContext().getTransaction().commit();
-					} catch (Exception e) {
-						getPersistenceContext().getTransaction().rollback();
-						throw new RuntimeException(e);
-					}
-				}
-			}
-			
-			public void posAction() {
-				fireEvent(new DeletarMercadoriaEvent(m));
-			}
-		});
-		
 		frame.getTable().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
 				if (event.getClickCount() == 2) {

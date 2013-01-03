@@ -1,11 +1,17 @@
 package br.com.yaw.sjpac.controller;
 
+import javax.swing.JOptionPane;
+
 import br.com.yaw.sjpac.action.AbstractAction;
+import br.com.yaw.sjpac.action.TransactionAction;
 import br.com.yaw.sjpac.dao.MercadoriaDAO;
 import br.com.yaw.sjpac.dao.MercadoriaDAOJPA;
+import br.com.yaw.sjpac.event.DeletarMercadoriaEvent;
 import br.com.yaw.sjpac.event.IncluirMercadoriaEvent;
 import br.com.yaw.sjpac.model.Mercadoria;
 import br.com.yaw.sjpac.ui.IncluirMercadoriaFrame;
+import br.com.yaw.sjpac.validation.MercadoriaValidator;
+import br.com.yaw.sjpac.validation.Validator;
 
 /**
  * Define a <code>Controller</code> responsável por gerir a tela de inclusão/edição de <code>Mercadoria</code>.
@@ -17,6 +23,7 @@ import br.com.yaw.sjpac.ui.IncluirMercadoriaFrame;
 public class IncluirMercadoriaController extends PersistenceController {
 
 	private IncluirMercadoriaFrame frame;
+	private Validator<Mercadoria> validador = new MercadoriaValidator();
 	
 	public IncluirMercadoriaController(AbstractController parent) {
 		super(parent);
@@ -29,20 +36,23 @@ public class IncluirMercadoriaController extends PersistenceController {
 			}
 		});
 		
-		registerAction(frame.getSalvarButton(), new AbstractAction() {
+		registerAction(frame.getSalvarButton(), new TransactionAction() {
 			private Mercadoria m;
 			
-			public void action() {
-				try {
-					getPersistenceContext().getTransaction().begin();
-					Mercadoria m = IncluirMercadoriaController.this.frame.getMercadoria();
-					MercadoriaDAO dao = new MercadoriaDAOJPA(getPersistenceContext());
-					dao.save(m);
-					getPersistenceContext().getTransaction().commit();
-				} catch (Exception e) {
-					getPersistenceContext().getTransaction().rollback();
-					throw new RuntimeException(e);
+			@Override
+			protected void preAction() {
+				Mercadoria m = IncluirMercadoriaController.this.frame.getMercadoria();
+				String msg = validador.validate(m);
+				if (!"".equals(msg == null ? "" : msg)) {
+					interrupt();
+					JOptionPane.showMessageDialog(frame, msg, "Validação", JOptionPane.INFORMATION_MESSAGE);
 				}
+			}
+			
+			public void action() {
+				m = IncluirMercadoriaController.this.frame.getMercadoria();
+				MercadoriaDAO dao = new MercadoriaDAOJPA(getPersistenceContext());
+				dao.save(m);
 			}
 			
 			public void posAction() {
@@ -50,6 +60,26 @@ public class IncluirMercadoriaController extends PersistenceController {
 				fireEvent(new IncluirMercadoriaEvent(m));
 			}
 			
+		});
+		
+		registerAction(frame.getExcluirButton(), new TransactionAction() {
+			Mercadoria m;
+			
+			public void action() {
+				Integer id = frame.getMercadoriaId();
+				if (id != null) {
+					MercadoriaDAO dao = new MercadoriaDAOJPA(getPersistenceContext());
+                    m = dao.findById(id);
+                    if (m != null) {
+                        dao.remove(m);
+                    }
+				}
+			}
+			
+			public void posAction() {
+				cleanUp();
+				fireEvent(new DeletarMercadoriaEvent(m));
+			}
 		});
 	}
 	
@@ -60,13 +90,13 @@ public class IncluirMercadoriaController extends PersistenceController {
 	
 	public void show(Mercadoria m) {
 		frame.setMercadoria(m);
-		frame.setTitle("Editar");
+		frame.setTitle("Editar Mercadoria");
 		show();
 	}
 	
 	@Override
 	protected void cleanUp() {
-		frame.setTitle("Incluir");
+		frame.setTitle("Incluir Mercadoria");
 		frame.setVisible(false);
 		frame.resetForm();
 		
