@@ -1,9 +1,13 @@
 package br.com.yaw.sjpac.event;
 
 /**
- * Estipula um contrato para componentes com a capacidade de tratar um evento gerado.
+ * Contrato para componentes com a capacidade de definir tratamento adequado para um evento.
  * 
- * <p>Em conjunto com <code>AbstractController</code> e <code>AbstractEvent</code>, esse componente é parte do trecho que implementa o design pattern <strong>Observer</strong>.</p>
+ * <p>
+ *  Em conjunto com <code>AbstractController</code> e <code>AbstractEvent</code>, esse componente 
+ *  é parte do trecho que implementa o design pattern <strong>Observer</strong>.
+ * </p>
+ * 
  * <p><code>AbstractEventListener</code> atua como observador.</p>
  * 
  * @see br.com.yaw.sjpac.event.AbstractEvent

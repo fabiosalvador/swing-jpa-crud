@@ -44,7 +44,7 @@ public class IncluirMercadoriaController extends PersistenceController {
 					
 					@Override
 					public boolean conditional() {
-						Mercadoria m = IncluirMercadoriaController.this.frame.getMercadoria();
+						Mercadoria m = frame.getMercadoria();
 						String msg = validador.validate(m);
 						if (!"".equals(msg == null ? "" : msg)) {
 							JOptionPane.showMessageDialog(frame, msg, "Validação", JOptionPane.INFORMATION_MESSAGE);
@@ -62,7 +62,7 @@ public class IncluirMercadoriaController extends PersistenceController {
 								
 								@Override
 								protected void action() {
-									m = IncluirMercadoriaController.this.frame.getMercadoria();
+									m = frame.getMercadoria();
 									MercadoriaDAO dao = new MercadoriaDAOJPA(getPersistenceContext());
 									dao.save(m);
 								}

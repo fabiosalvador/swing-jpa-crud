@@ -82,6 +82,9 @@ public class BuscaMercadoriaFrame extends JFrame {
 		return bBuscar;
 	}
 
+	/**
+	 * @return o texto preenchido no campo de consulta.
+	 */
 	public String getText() {
 		return tfNome.getText();
 	}

@@ -29,6 +29,7 @@ public class MercadoriaDAOJPA extends AbstractDAO<Mercadoria, Integer> implement
 	 * Reliza a pesquisa mercadorias com filtro no nome (via operador <code>like</code>).
 	 * @see br.com.yaw.sjpac.dao.MercadoriaDAO#getMercadoriasByNome(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Mercadoria> getMercadoriasByNome(String nome) {
 		if (nome == null || nome.isEmpty())

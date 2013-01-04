@@ -27,8 +27,9 @@ public class BuscarMercadoriaController extends PersistenceController {
 		
 		registerAction(frame.getBuscarButton(), new AbstractAction() {
 			
-			List<Mercadoria> list; 
+			private List<Mercadoria> list; 
 			
+			@Override
 			public void action() {
 				if (frame.getText().length() > 0) {
 					MercadoriaDAO dao = new MercadoriaDAOJPA(getPersistenceContext());
@@ -36,6 +37,7 @@ public class BuscarMercadoriaController extends PersistenceController {
 				}
 			}
 			
+			@Override
 			public void posAction() {
 				cleanUp();
 				if (list != null) {

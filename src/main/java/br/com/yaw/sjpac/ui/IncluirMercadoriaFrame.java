@@ -17,7 +17,12 @@ import br.com.yaw.sjpac.model.Mercadoria;
 
 
 /**
- * Tela para incluir o registro da <code>Mercadoria</code>.
+ * Tela para incluir/editar o registro da <code>Mercadoria</code>.
+ * 
+ * <p>
+ *  Essa tela trabalha em modo inclusão ou edição de <code>Mercadoria</code>.
+ *  Em edição é possível acionar a funcionalidade para remover <code>Mercadoria</code>.
+ * </p>
  * 
  * @author YaW Tecnologia
  */
@@ -120,21 +125,31 @@ public class IncluirMercadoriaFrame extends JFrame {
 	}
 	
 	private Mercadoria loadMercadoriaFromPanel() {
-		String nome = tfNome.getText().trim();
-		String descricao = tfDescricao.getText().trim();
+		String nome = null;
+		if (!tfNome.getText().trim().isEmpty()) {
+			nome = tfNome.getText().trim();
+		}
+		
+		String descricao = null;
+		if (!tfDescricao.getText().trim().isEmpty()) {
+			descricao = tfDescricao.getText().trim();
+		}
 		
 		Integer quantidade = null;
 		try {
+			if (!tfQuantidade.getText().trim().isEmpty())
 			quantidade = Integer.valueOf(tfQuantidade.getText());
 		} catch (NumberFormatException nex) {
-			throw new RuntimeException("Campo quantidade com conteudo invalido!");
+			throw new RuntimeException("Erro na conversão do campo quantidade (Integer).\nConteudo inválido!");
 		}
 		
 		Double preco = null;
 		try {
-			preco = Mercadoria.formatStringToPreco(tfPreco.getText());
+			if (!tfPreco.getText().trim().isEmpty()) {
+				preco = Mercadoria.formatStringToPreco(tfPreco.getText());
+			}
 		} catch (ParseException nex) {
-			throw new RuntimeException("Campo preco com conteudo invalido!");
+			throw new RuntimeException("Erro durante a conversão do campo preço (Double).\nConteudo inválido!");
 		}
 		
 		Integer id = null;
@@ -169,6 +184,10 @@ public class IncluirMercadoriaFrame extends JFrame {
 		tfVersion.setValue(m.getVersion());
 	}
 	
+	/**
+	 * Limpa e carrega os campos da tela de acordo com objeto <code>Mercadoria</code>.
+	 * @param m referência da <code>Mercadoria</code> que deve ser apresentada na tela.
+	 */
 	public void setMercadoria(Mercadoria m){
 		resetForm();
 		if (m != null) {
@@ -177,10 +196,16 @@ public class IncluirMercadoriaFrame extends JFrame {
 		}
 	}
 	
+	/**
+	 * @return uma nova instância de <code>Mercadoria</code> com os dados preenchidos do campos na tela.
+	 */
 	public Mercadoria getMercadoria() {
 		return loadMercadoriaFromPanel();
 	}
 	
+	/**
+	 * @return o identificador da <code>Mercadoria</code> em edição. Retorna <code>null</code> em modo de inclusão.
+	 */
 	public Integer getMercadoriaId() {
 		try {
 			return Integer.parseInt(tfId.getText());

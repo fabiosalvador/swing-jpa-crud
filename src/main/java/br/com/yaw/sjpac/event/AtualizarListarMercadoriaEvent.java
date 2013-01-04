@@ -1,7 +1,7 @@
 package br.com.yaw.sjpac.event;
 
 /**
- * Define um evento para a atualizar a tabela de mercadorias.
+ * Evento deve ser gerado quando for necessário atualizar a tabela de mercadorias.
  * 
  * @author YaW Tecnologia
  */

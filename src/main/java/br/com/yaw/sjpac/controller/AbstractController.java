@@ -43,8 +43,8 @@ public abstract class AbstractController implements ActionListener, WindowListen
 	private Map<String, AbstractAction> actions = 
 			new HashMap<String, AbstractAction>();
 	
-	private Map<Class<?>, List<AbstractEventListener>> eventListeners = 
-			new HashMap<Class<?>, List<AbstractEventListener>>();
+	private Map<Class<?>, List<AbstractEventListener<?>>> eventListeners = 
+			new HashMap<Class<?>, List<AbstractEventListener<?>>>();
 	
 	public AbstractController(){}
 	
@@ -75,10 +75,12 @@ public abstract class AbstractController implements ActionListener, WindowListen
     }
 	
 	/**
-	 * Notifica o <code>evento</code>.
+	 * Aciona o <code>AbstractEventListener</code> relacionado ao <code>AbstractEvent</code>
+	 * para que o <code>listener</code> trate o evento.
 	 * 
-	 * @param event tipo do evento
+	 * @param event referência do evento gerado
 	 */
+	@SuppressWarnings("unchecked")
 	protected void fireEvent(AbstractEvent<?> event) {
 		if (eventListeners.get(event.getClass()) != null) {
             for (AbstractEventListener eventListener : eventListeners.get(event.getClass())) {
@@ -94,13 +96,13 @@ public abstract class AbstractController implements ActionListener, WindowListen
 	 * Registra um <code>listener</code> que deve ser acionado de acordo com o tipo do <code>evento</code>.
 	 * 
 	 * @param eventClass tipo do evento
-	 * @param eventListener tratador (listener) do evento
+	 * @param eventListener tratador (<code>listener</code>) do evento
 	 */
-	protected void registerEventListener(Class<?> eventClass, AbstractEventListener eventListener) {
+	protected void registerEventListener(Class<?> eventClass, AbstractEventListener<?> eventListener) {
         log.debug("Registrando listener: " + eventListener + " para o evento: " + eventClass.getName());
-        java.util.List<AbstractEventListener> listenersForEvent = eventListeners.get(eventClass);
+        java.util.List<AbstractEventListener<?>> listenersForEvent = eventListeners.get(eventClass);
         if (listenersForEvent == null) {
-        	listenersForEvent = new ArrayList<AbstractEventListener>(); 
+        	listenersForEvent = new ArrayList<AbstractEventListener<?>>(); 
         }
         listenersForEvent.add(eventListener);
         eventListeners.put(eventClass, listenersForEvent);
@@ -145,7 +147,7 @@ public abstract class AbstractController implements ActionListener, WindowListen
     }
 	
 	/**
-	 * Método utilizado para liberar recursos carregados pela Controller.
+	 * Método utilizado para liberar recursos carregados pela <code>Controller</code>.
 	 */
 	protected void cleanUp() {
 		log.debug("Liberando recursos do controller "+this.getClass().getName());
