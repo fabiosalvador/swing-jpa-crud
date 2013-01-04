@@ -40,7 +40,6 @@ public class IncluirMercadoriaFrame extends JFrame {
 	private JButton bExcluir;
 	
 	public IncluirMercadoriaFrame() {
-		setTitle("Incluir");
 		setSize(300,250);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -112,9 +111,9 @@ public class IncluirMercadoriaFrame extends JFrame {
 
 		painel.add(new JLabel("Nome:"));
 		painel.add(tfNome);
-		painel.add(new JLabel("Descricao:"));
+		painel.add(new JLabel("Descrição:"));
 		painel.add(tfDescricao);
-		painel.add(new JLabel("Preco:"));
+		painel.add(new JLabel("Preço:"));
 		painel.add(tfPreco);
 		painel.add(new JLabel("Quantidade:"));
 		painel.add(tfQuantidade);
@@ -140,7 +139,7 @@ public class IncluirMercadoriaFrame extends JFrame {
 			if (!tfQuantidade.getText().trim().isEmpty())
 			quantidade = Integer.valueOf(tfQuantidade.getText());
 		} catch (NumberFormatException nex) {
-			throw new RuntimeException("Erro na conversão do campo quantidade (Integer).\nConteudo inválido!");
+			throw new RuntimeException("Erro durante a conversão do campo quantidade (Integer).\nConteudo inválido!");
 		}
 		
 		Double preco = null;

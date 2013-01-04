@@ -13,7 +13,7 @@ package br.com.yaw.sjpac.event;
  *  Ambos os componentes implementam o design pattern <strong>Observer</strong>.
  * </p>
  * 
- * <p><code>AbstractEventListener</code> atua como observado.</p>
+ * <p><code>AbstractEventListener</code> atua como <i>observado</i>.</p>
  * 
  * @see br.com.yaw.sjpac.event.AbstractEventListener
  * 

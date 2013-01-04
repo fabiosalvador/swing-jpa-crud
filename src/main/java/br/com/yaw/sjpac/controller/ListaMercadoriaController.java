@@ -21,7 +21,7 @@ import br.com.yaw.sjpac.util.JPAUtil;
 /**
  * Define a <code>Controller</code> principal do sistema, responsável por gerir a tela com a lista de <code>Mercadoria</code>.
  * 
- * @see br.com.yaw.ssjc.controller.PersistenceController
+ * @see br.com.yaw.sjpac.controller.PersistenceController
  * 
  * @author YaW Tecnologia
  */

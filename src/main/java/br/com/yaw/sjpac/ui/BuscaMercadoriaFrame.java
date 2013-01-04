@@ -13,7 +13,8 @@ import javax.swing.JTextField;
 
 
 /**
- * Tela utilizada para realizar a pesquisa de <code>Mercadoria</code> com filtro no campo <code>nome</code>. 
+ * Tela utilizada para realizar a pesquisa de <code>Mercadoria</code>
+ * com filtro no campo <code>nome</code>. 
  * 
  * @author YaW Tecnologia
  */

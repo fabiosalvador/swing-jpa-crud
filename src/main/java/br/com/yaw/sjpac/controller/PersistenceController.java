@@ -14,7 +14,7 @@ import br.com.yaw.sjpac.util.JPAUtil;
  *  para as operações de persistência definidas na <code>Controller</code>.
  * </p>
  * 
- * @see br.com.yaw.ssjc.controller.AbstractController
+ * @see br.com.yaw.sjpac.controller.AbstractController
  * 
  * @author YaW Tecnologia
  */

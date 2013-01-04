@@ -8,7 +8,7 @@ package br.com.yaw.sjpac.event;
  *  é parte do trecho que implementa o design pattern <strong>Observer</strong>.
  * </p>
  * 
- * <p><code>AbstractEventListener</code> atua como observador.</p>
+ * <p><code>AbstractEventListener</code> atua como <i>observador</i>.</p>
  * 
  * @see br.com.yaw.sjpac.event.AbstractEvent
  * 

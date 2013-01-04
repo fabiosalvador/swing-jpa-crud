@@ -31,7 +31,7 @@ public abstract class AbstractAction {
 	
 	/**
 	 * Método acionado <strong>antes</string> de <code>action()</code>.
-	 * <p>Caso uma exceção (<code>RuntimeException</code>) seja lançada, a execução de toda a <code>AbstractAction</code> é interrompida.</p> 
+	 * <p>Caso uma exceção (<code>RuntimeException</code>) seja lançada, a execução de toda a <code>AbstractAction</code> é interrompida.</p>
 	 */
 	protected void preAction(){}
 

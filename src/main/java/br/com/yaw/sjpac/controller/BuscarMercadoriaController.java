@@ -12,7 +12,7 @@ import br.com.yaw.sjpac.ui.BuscaMercadoriaFrame;
 /**
  * Define a <code>Controller</code> responsável por gerir a tela de Busca de <code>Mercadoria</code> pelo campo <code>nome</code>.
  * 
- * @see br.com.yaw.ssjc.controller.PersistenceController
+ * @see br.com.yaw.sjpac.controller.PersistenceController
  * 
  * @author YaW Tecnologia
  */

@@ -9,6 +9,13 @@ import javax.validation.ValidatorFactory;
 
 import br.com.yaw.sjpac.model.Mercadoria;
 
+/**
+ * Implementa componente para validar os dados da entidade <code>Mercadoria</code>.
+ * 
+ * <p>A validação ocorre através do Bean Validations, mecanismo de validação padrão do Java baseado em anotações.</p>
+ * 
+ * @author YaW Tecnologia
+ */
 public class MercadoriaValidator implements Validator<Mercadoria> {
 	
 	private static ValidatorFactory factory;

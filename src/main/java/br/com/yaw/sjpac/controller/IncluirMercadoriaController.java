@@ -18,7 +18,7 @@ import br.com.yaw.sjpac.validation.Validator;
 /**
  * Define a <code>Controller</code> responsável por gerir a tela de inclusão/edição de <code>Mercadoria</code>.
  * 
- * @see br.com.yaw.ssjc.controller.PersistenceController
+ * @see br.com.yaw.sjpac.controller.PersistenceController
  * 
  * @author YaW Tecnologia
  */
