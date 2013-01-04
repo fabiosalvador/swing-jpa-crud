@@ -3,7 +3,9 @@ package br.com.yaw.sjpac.controller;
 import javax.swing.JOptionPane;
 
 import br.com.yaw.sjpac.action.AbstractAction;
-import br.com.yaw.sjpac.action.TransactionAction;
+import br.com.yaw.sjpac.action.BooleanExpression;
+import br.com.yaw.sjpac.action.ConditionalAction;
+import br.com.yaw.sjpac.action.TransactionalAction;
 import br.com.yaw.sjpac.dao.MercadoriaDAO;
 import br.com.yaw.sjpac.dao.MercadoriaDAOJPA;
 import br.com.yaw.sjpac.event.DeletarMercadoriaEvent;
@@ -36,51 +38,65 @@ public class IncluirMercadoriaController extends PersistenceController {
 			}
 		});
 		
-		registerAction(frame.getSalvarButton(), new TransactionAction() {
-			private Mercadoria m;
-			
-			@Override
-			protected void preAction() {
-				Mercadoria m = IncluirMercadoriaController.this.frame.getMercadoria();
-				String msg = validador.validate(m);
-				if (!"".equals(msg == null ? "" : msg)) {
-					interrupt();
-					JOptionPane.showMessageDialog(frame, msg, "Validação", JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
-			
-			public void action() {
-				m = IncluirMercadoriaController.this.frame.getMercadoria();
-				MercadoriaDAO dao = new MercadoriaDAOJPA(getPersistenceContext());
-				dao.save(m);
-			}
-			
-			public void posAction() {
-				cleanUp();
-				fireEvent(new IncluirMercadoriaEvent(m));
-			}
-			
-		});
+		registerAction(frame.getSalvarButton(), 
+			ConditionalAction.build()
+				.addConditional(new BooleanExpression() {
+					
+					@Override
+					public boolean conditional() {
+						Mercadoria m = IncluirMercadoriaController.this.frame.getMercadoria();
+						String msg = validador.validate(m);
+						if (!"".equals(msg == null ? "" : msg)) {
+							JOptionPane.showMessageDialog(frame, msg, "Validação", JOptionPane.INFORMATION_MESSAGE);
+							return false;
+						}
+						return true;
+					}
+				})
+				.addAction(
+					TransactionalAction.build()
+						.persistenceCtxOwner(this)
+						.addAction(
+							new AbstractAction() {
+								private Mercadoria m;
+								
+								@Override
+								protected void action() {
+									m = IncluirMercadoriaController.this.frame.getMercadoria();
+									MercadoriaDAO dao = new MercadoriaDAOJPA(getPersistenceContext());
+									dao.save(m);
+								}
+								
+								public void posAction() {
+									cleanUp();
+									fireEvent(new IncluirMercadoriaEvent(m));
+								}
+							})));
 		
-		registerAction(frame.getExcluirButton(), new TransactionAction() {
-			Mercadoria m;
-			
-			public void action() {
-				Integer id = frame.getMercadoriaId();
-				if (id != null) {
-					MercadoriaDAO dao = new MercadoriaDAOJPA(getPersistenceContext());
-                    m = dao.findById(id);
-                    if (m != null) {
-                        dao.remove(m);
-                    }
-				}
-			}
-			
-			public void posAction() {
-				cleanUp();
-				fireEvent(new DeletarMercadoriaEvent(m));
-			}
-		});
+		registerAction(frame.getExcluirButton(), 
+			TransactionalAction.build()
+				.persistenceCtxOwner(this)
+				.addAction(new AbstractAction() {
+					private Mercadoria m;
+					
+					@Override
+					protected void action() {
+						Integer id = frame.getMercadoriaId();
+						if (id != null) {
+							MercadoriaDAO dao = new MercadoriaDAOJPA(getPersistenceContext());
+		                    m = dao.findById(id);
+		                    if (m != null) {
+		                        dao.remove(m);
+		                    }
+						}
+					}
+					
+					public void posAction() {
+						cleanUp();
+						fireEvent(new DeletarMercadoriaEvent(m));
+					}
+				})
+		);
 	}
 	
 	public void show() {

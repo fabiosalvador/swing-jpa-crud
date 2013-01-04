@@ -17,7 +17,7 @@ package br.com.yaw.sjpac.action;
 public final class ConditionalAction extends AbstractAction {
 
 	/**
-	 * Referência para a ação que deverá ser processada.
+	 * Referência para a ação que deverá executar de acordo com a condição <code>boolean</code>.
 	 */
 	private AbstractAction action;
 	
@@ -30,29 +30,22 @@ public final class ConditionalAction extends AbstractAction {
 	
 	/**
 	 * Avalia a condição <code>boolean</code> para processar ou não a ação.
-	 * 
 	 * @throws <code>IllegalArgumentException</code> caso não tenha ação e/ou condição <code>boolean</code> vinculada.
 	 */
 	@Override
 	protected void action() {
 		if (action == null) {
-			throw new IllegalArgumentException("Indique a Ação que deve ser executada.");
+			throw new IllegalArgumentException("Indique a Ação que deve ser executada, utilize o método addAction.");
 		}
 		
 		if (expression == null) {
-			throw new IllegalArgumentException("Indique a expressão condicional da Ação.");
+			throw new IllegalArgumentException("Indique a expressão condicional da Ação, utilize o método addConditional.");
 		}
 		
 		if (expression.conditional()) {
 			action.actionPerformed();
 		}
 	}
-	
-	@Override
-	protected final void preAction() {}
-	
-	@Override
-	protected final void posAction() {}
 	
 	/**
 	 * @return Constrói e retorna uma instância de <code>ConditionalAction</code> sem ação e condição definida.
