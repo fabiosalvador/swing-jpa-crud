@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -48,6 +49,23 @@ public class IncluirMercadoriaFrame extends JFrame {
 		panel.add(montaPanelEditarMercadoria(), BorderLayout.CENTER);
 		panel.add(montaPanelBotoesEditar(), BorderLayout.SOUTH);
 		add(panel);
+		
+		GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 	}
 	
 	private JPanel montaPanelBotoesEditar() {
@@ -102,8 +120,8 @@ public class IncluirMercadoriaFrame extends JFrame {
 	}
 	
 	private Mercadoria loadMercadoriaFromPanel() {
-		String nome = tfNome.getText();
-		String descricao = tfDescricao.getText();
+		String nome = tfNome.getText().trim();
+		String descricao = tfDescricao.getText().trim();
 		
 		Integer quantidade = null;
 		try {

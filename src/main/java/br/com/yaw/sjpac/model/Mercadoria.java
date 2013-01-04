@@ -15,9 +15,19 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Classe de modelo que representa uma mercadoria. A mercadoria é um objeto persistido no banco de dados, por isso utilizamos a classificamos como <strong>Entidade</strong>.
+ * Classe de modelo que representa uma mercadoria.
  * 
- * <p>As funcionalidades desse sistema demonstração são concentradas no cadastro (CRUD) de mercadorias.</p>  
+ * <p>A <code>mercadoria</code> é um objeto persistido no banco de dados, por isso a classificamos como <strong>Entidade</strong>.</p>
+ * 
+ * <p>Por se tratar de uma Entidade persistente, a <code>Mercadoria</code> utiliza as anotações <code>JPA</code> para definir o mapeamento <code>ORM</code>.
+ * 
+ * <p>As funcionalidades desse sistema demonstração são concentradas no cadastro (CRUD) de mercadorias.</p>
+ * 
+ * <p>
+ *  Outra característica dessa classe, é o uso de anotações do Bean Validations para validar o estado (dados) da <code>Mercadoria</code>.
+ *  Bean Validations (JSR 303) é uma especificação Java para habilitar a validação de dados via o uso de anotações. O principal provider
+ *  dessa API é o <code>Hibernate Validator</code>.
+ * </p>
  * 
  * @author YaW Tecnologia
  */
@@ -25,6 +35,9 @@ import javax.validation.constraints.Size;
 @Table(name="mercadoria")
 public class Mercadoria implements AbstractEntity {
 
+	/**
+	 * Chave primária da entidade <code>Mercadoria</code>. O valor gerado pelo banco de dados.
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
