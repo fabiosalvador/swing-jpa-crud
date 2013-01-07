@@ -6,7 +6,7 @@ O projeto é uma demonstração de aplicativo desktop desenvolvido com as tecnol
 A aplicação utiliza o HSQLDB (HyperSQL DataBase), um banco de dados relacional escrito em Java, adequado para projetos com propósitos de estudos.
 
 Essa aplicação disponibiliza um CRUD, com funcionalidades identicas do projeto swing-jdbc-crud [https://github.com/yaw/swing-jdbc-crud].
-Além de utilizar uma API alto nível (Spring JDBC) para resolver a integração com o Banco, essa aplicação define a arquitetura MVC (Model View Controller). 
+Além de utilizar uma tecnologia padrão para o mapeamento objeto relacional (ORM), essa aplicação define a arquitetura MVC (Model View Controller). 
 
 Tecnologias utilizadas na implementação:
 * Swing: utilizamos o framework Swing para construção das interfaces e componentes gráficos da aplicação (camada cliente);
