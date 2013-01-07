@@ -1,20 +1,16 @@
 package br.com.yaw.sjpac.ui;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.KeyStroke;
 
-import br.com.yaw.sjpac.action.AbstractAction;
 import br.com.yaw.sjpac.model.Mercadoria;
 
 /**
@@ -32,7 +28,7 @@ public class ListaMercadoriasFrame extends JFrame {
 	private JButton bFindMercadoria;
 	private JButton bRefreshLista;
 	private JMenuBar menubar;
-	private JMenu menuAjuda;
+	private MenuF1 menuAjuda;
 	private JMenuItem menuSobre;
 	
 	public ListaMercadoriasFrame() {
@@ -65,9 +61,9 @@ public class ListaMercadoriasFrame extends JFrame {
 		bRefreshLista.setMnemonic(KeyEvent.VK_A);
 		
 		menubar = new JMenuBar();
-		menuAjuda = new JMenu("Ajuda");
+		menuAjuda = new MenuF1("Ajuda");
 		menuAjuda.setMnemonic(KeyEvent.VK_J);
-        menuSobre = new JMenuItem("Sobre");
+        menuSobre = new JMenuItem("Sobre    - F1");
         
         menuAjuda.add(menuSobre);
         menubar.add(menuAjuda);
@@ -111,13 +107,7 @@ public class ListaMercadoriasFrame extends JFrame {
 		return menuSobre;
 	}
 	
-	public void addActionF1(final AbstractAction action) {
-		menuAjuda.getInputMap().put(KeyStroke.getKeyStroke("F1"),"pressed");
-        menuAjuda.getActionMap().put("pressed", new javax.swing.AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				action.actionPerformed();
-			}
-		});
+	public MenuF1 getMenuAjuda() {
+		return menuAjuda;
 	}
 }

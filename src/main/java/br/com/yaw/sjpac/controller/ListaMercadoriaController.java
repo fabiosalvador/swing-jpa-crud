@@ -67,7 +67,7 @@ public class ListaMercadoriaController extends PersistenceController {
 			}
 		};
 		registerAction(frame.getMenuSobre(), sobreAction);
-		frame.addActionF1(sobreAction);
+		frame.getMenuAjuda().addListener(sobreAction);
 		
 		frame.getTable().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
