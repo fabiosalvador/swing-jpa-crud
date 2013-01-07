@@ -40,9 +40,8 @@ public class BuscarMercadoriaController extends PersistenceController {
 			@Override
 			public void posAction() {
 				cleanUp();
-				if (list != null) {
-					fireEvent(new BuscarMercadoriaEvent(list));
-				}
+				fireEvent(new BuscarMercadoriaEvent(list));
+				list = null;
 			}
 		});
 	}

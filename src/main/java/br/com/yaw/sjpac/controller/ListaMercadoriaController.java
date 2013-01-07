@@ -2,6 +2,7 @@ package br.com.yaw.sjpac.controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.SwingUtilities;
 
@@ -59,12 +60,14 @@ public class ListaMercadoriaController extends PersistenceController {
 			}
 		});
 		
-		registerAction(frame.getMenuSobre(), new AbstractAction() {
+		AbstractAction sobreAction =  new AbstractAction() {
 			@Override
 			protected void action() {
 				sobreFrame.setVisible(true);
 			}
-		});
+		};
+		registerAction(frame.getMenuSobre(), sobreAction);
+		frame.addActionF1(sobreAction);
 		
 		frame.getTable().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
@@ -111,7 +114,10 @@ public class ListaMercadoriaController extends PersistenceController {
 			public void handleEvent(final BuscarMercadoriaEvent event) {
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
-						frame.refreshTable(event.getTarget());
+						List<Mercadoria> list = event.getTarget();
+						if (list != null) {
+							frame.refreshTable(event.getTarget());
+						}
 					}
 				});
 			}

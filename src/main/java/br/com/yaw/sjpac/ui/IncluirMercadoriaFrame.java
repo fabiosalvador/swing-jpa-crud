@@ -77,7 +77,7 @@ public class IncluirMercadoriaFrame extends JFrame {
 
 		bSalvar = new JButton("Salvar");
 		bSalvar.setActionCommand("salvarIncluirMercadoriaAction");
-		bSalvar.setMnemonic(KeyEvent.VK_M);
+		bSalvar.setMnemonic(KeyEvent.VK_S);
 		panel.add(bSalvar);
 
 		bCancelar = new JButton("Cancelar");
@@ -169,7 +169,7 @@ public class IncluirMercadoriaFrame extends JFrame {
 		tfNome.setText("");
 		tfDescricao.setText("");
 		tfPreco.setText("");
-		tfQuantidade.setValue(new Integer(1));
+		tfQuantidade.setValue(Integer.valueOf(1));
 		tfVersion.setValue(null);
 		bExcluir.setVisible(false);
 	}
